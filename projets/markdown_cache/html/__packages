@@ -1,0 +1,12 @@
+base
+sp
+maptools
+foreign
+shapefiles
+raster
+readxl
+readr
+scales
+ggplot2
+rgdal
+rgeos

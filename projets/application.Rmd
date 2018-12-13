@@ -1,0 +1,62 @@
+---
+title: "CARTOGRAPHIE"
+author: "marwa mezghanni"
+date: "November 10, 2018"
+output: html_document
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message = FALSE,warning = FALSE)
+```
+
+##Instalation des packages necessaires pour ce travail:
+
+```{r}
+library(maptools)
+library(sp)
+library(shapefiles)
+library(raster)
+library(readxl)
+library(readr)
+library(scales)
+library(ggplot2)
+library(rgdal)
+library(rgeos)
+```
+
+##Traitement:
+On commence par faire le plot de la carte de la Tunisie en utilisant le package raster 
+```{r pressure}
+m_deleg<- getData(name="GADM",  country="TUN", level=2)
+plot(m_deleg)
+```
+
+Et puis on importe notre jeu de donnees ainsi que la base qui contient le code de chaque delegation de la Tunisie. Notre jeu de donnees concerne les logements distant plus de 2 Km depuis le plus proche centre sportif. On fait apres une jointure de ces bases afin d'avoir pour chaque delegation la valeur de la variable d'interet et son code.
+
+```{r,cache=TRUE}
+code=read.csv("delegationTotclean1.csv")
+base <- read_excel("base.xlsx")
+base=base[-1,]
+base=base[,-1]
+i=match(base[,1] ,code$deg)
+base$hasc=code$HASC_2a[i]
+```
+
+Le jeu de donnees devient alors :
+
+````{r}
+head(base)
+````
+
+Et on finit par appliquer les donnees sur la carte initialement preparee.
+
+```{r}
+tn_deleg_fr <- fortify(m_deleg,region = "HASC_2")
+j=match(tn_deleg_fr$id,base$hasc)
+tn_deleg_fr$Valeur=base$Valeur[j]
+
+p2<-ggplot(tn_deleg_fr, aes(x=long, y=lat, group=group))+geom_polygon(aes(fill=Valeur),color = "black")+labs(x="",y="")+ theme_bw()+coord_fixed()+scale_fill_gradientn(colours=c("blue","white","red"),values=rescale(c(-100,0,100)))
+p2<-p2+ theme(legend.position="right")
+p2+labs(fill = "Nombre des logements")
+```

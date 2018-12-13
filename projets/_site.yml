@@ -1,0 +1,23 @@
+name:  marwa mezghanni
+output_dir: '.'
+navbar:
+  title: marwa mezghanni
+  type: inverse
+  left:
+  - text: Home
+    icon: fa-home
+    href: index1.html
+  - text: markdown ACP
+    href: PCA.html
+  - text: mon application Shiny
+    href: cv.html
+  - text: cartographie de la Tunisie
+    href: application.html
+
+
+output:
+  html_document:
+    highlight: textmate
+    css: styles.css
+    lib_dir: site_libs
+    self_contained: no

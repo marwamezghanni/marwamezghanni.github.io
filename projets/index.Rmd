@@ -1,0 +1,9 @@
+---
+
+---
+<link rel="stylesheet" href="styles.css" type="text/css">
+
+Hi ! I am marwa mezghani 22 years old currently studying at the school of statistics and information analysis. I am lookinf for a company that could welcome me in the contexte of an internship for a period of four months. 
+Having a deep mathematical background, i was able to apply in the field of statistics and data analysis using R. Bayesien statistic , data mining and risk management interst me particularly but i woud be open to learn any new concept from your part . 
+Along side my studies, i have been a member of SSF association, general secretary, which allowed me to work on my soft skills such as team work , time management ... 
+I am highly driven person who always looks for a challenges and new adventures. 
